@@ -3,4 +3,5 @@ In this task, we are supposed to make an electrical circuit that consists of a d
 
 ## Distance is closer than 100
 in the following figure, the object is at distance 55. Notice the LED is lighted on.
+
 ![Screenshot 2023-07-24 at 02-20-30 Circuit design Amazing Snaget Tinkercad](https://github.com/Abdullah-BS/Electrical-Task-3-Sensors/assets/139412761/e647e3d9-a3fc-4015-986c-232e43d9cdde)

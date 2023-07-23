@@ -1,0 +1,41 @@
+// C++ code
+//
+
+int led = 2;
+int echo = 3;
+int trig =4;
+long duration;
+int distance; 
+void setup()
+{
+  pinMode(led, OUTPUT);
+  pinMode(echo, INPUT);
+  pinMode(trig, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  digitalWrite(trig, LOW);
+  delay(2);
+  
+  digitalWrite(trig, HIGH);
+  delay(10);
+  digitalWrite(trig, LOW);
+  
+  duration = pulseIn(echo, HIGH);
+  
+  // Calculating the distance
+  distance = duration * 0.034 / 2;
+  
+  // Show the distance in the serial monitor
+  Serial.print("The distance is: ");
+  Serial.println(distance);
+  
+  if(distance < 100) {
+    digitalWrite(led, HIGH);
+  }
+  else {
+    digitalWrite(led, LOW);
+  }
+}

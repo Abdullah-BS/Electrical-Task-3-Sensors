@@ -1,41 +1,67 @@
-// C++ code
-//
+#include <Adafruit_LiquidCrystal.h>
+Adafruit_LiquidCrystal lcd1(0);
 
-int led = 2;
-int echo = 3;
-int trig =4;
+int trig = 11;
+int echo = 10;
+int red = 8;
+int green = 9;
 long duration;
-int distance; 
-void setup()
-{
-  pinMode(led, OUTPUT);
-  pinMode(echo, INPUT);
-  pinMode(trig, OUTPUT);
-  Serial.begin(9600);
+int distance;
+
+void setup() {
+  // put your setup code here, to run once:
+
+lcd1.begin(16, 2);
+
+lcd1.setCursor(4,0);  // column , raw
+lcd1.print("Abdullah's");
+lcd1.setCursor(4,1);  
+lcd1.print("Project");
+delay(3000);
+lcd1.clear();
+lcd1.setCursor(2,1);  
+lcd1.print("Distance= ");
+
+pinMode(trig, OUTPUT);
+pinMode(echo, INPUT);
+pinMode(red, OUTPUT);
+pinMode(green, OUTPUT);
+Serial.begin(9600);
+
 }
 
-void loop()
-{
+void loop() {
+  // put your main code here, to run repeatedly:
+
+// Clears the trigPin
   digitalWrite(trig, LOW);
-  delay(2);
-  
+  delayMicroseconds(2);
+  // Sets the trigPin on HIGH state for 10 micro seconds
   digitalWrite(trig, HIGH);
-  delay(10);
+  delayMicroseconds(10);
   digitalWrite(trig, LOW);
-  
+  // Reads the echoPin, returns the sound wave travel time in microseconds
   duration = pulseIn(echo, HIGH);
-  
   // Calculating the distance
   distance = duration * 0.034 / 2;
-  
-  // Show the distance in the serial monitor
-  Serial.print("The distance is: ");
-  Serial.println(distance);
-  
-  if(distance < 100) {
-    digitalWrite(led, HIGH);
-  }
-  else {
-    digitalWrite(led, LOW);
-  }
+
+lcd1.clear();
+lcd1.setCursor(2,1);  
+lcd1.print("Distance= ");
+lcd1.setCursor(13,1);  
+lcd1.print(distance);
+delay(300);
+Serial.print("Distance: ");
+Serial.println(distance);
+
+if(distance > 100) {
+  digitalWrite(green, HIGH);
+  digitalWrite(red, LOW);
+
+}
+else {
+  digitalWrite(green, LOW);
+  digitalWrite(red, HIGH);
+
+}
 }
